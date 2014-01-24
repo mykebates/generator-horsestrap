@@ -1,6 +1,6 @@
 {
   "name": "generator-horsestrap",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A generator for Yeoman",
   "keywords": [
     "yeoman-generator"
@@ -24,7 +24,7 @@
     "yeoman-generator": "~0.14.0",
     "simple-git": "~0.5.0",
     "rimraf": "~2.2.6",
-    "ncp": "0.5.0"
+    "ncp": "~0.5.0"
   },
   "devDependencies": {
     "mocha": "~1.14.0"
