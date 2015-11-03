@@ -4,13 +4,12 @@ var path = require('path');
 var git = require('simple-git')();
 var yeoman = require('yeoman-generator');
 var rimraf = require('rimraf');
+var yosay = require('yosay');
 var ncp = require('ncp').ncp;
 
 
 var HorsestrapGenerator = module.exports = function HorsestrapGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
-
-  this.option('angular');
 
   //console.log(this.yeoman);
   this.on('end', function () {
@@ -22,25 +21,25 @@ var HorsestrapGenerator = module.exports = function HorsestrapGenerator(args, op
 
 util.inherits(HorsestrapGenerator, yeoman.generators.Base);
 
-// HorsestrapGenerator.prototype.askFor = function askFor() {
-//   var cb = this.async();
+HorsestrapGenerator.prototype.askFor = function askFor() {
+  var cb = this.async();
 
-//   // have Yeoman greet the user.
-//   console.log(this.yeoman);
+  // have Yeoman greet the user.
+  this.log(yosay("Quit horsin' around!"));
 
-//   var prompts = [{
-//     type: 'confirm',
-//     name: 'someOption',
-//     message: 'Would you like to enable this option?',
-//     default: true
-//   }];
+  var prompts = [{
+    type: 'confirm',
+    name: 'angular',
+    message: 'Would you like the trankin angular flavored Horsestrap?',
+    default: false
+  }];
 
-//   this.prompt(prompts, function (props) {
-//     this.someOption = props.someOption;
+  this.prompt(prompts, function (props) {
+    this.angular = props.angular;
 
-//     cb();
-//   }.bind(this));
-// };
+    cb();
+  }.bind(this));
+};
 
 HorsestrapGenerator.prototype.app = function app() {
   //this.mkdir('app');
@@ -64,7 +63,7 @@ HorsestrapGenerator.prototype.horseStrap = function() {
 
   var repo = 'git@github.com:mykebates/HorseStrap.git';
 
-  if(this.options.angular) {
+  if(this.angular) {
     repo = 'git@github.com:trankin/HorseStrap-Angular'
   }
 
