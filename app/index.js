@@ -9,6 +9,9 @@ var ncp = require('ncp').ncp;
 
 var HorsestrapGenerator = module.exports = function HorsestrapGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
+
+  this.option('angular');
+
   //console.log(this.yeoman);
   this.on('end', function () {
     //this.installDependencies({ skipInstall: options['skip-install'] });
@@ -59,7 +62,13 @@ HorsestrapGenerator.prototype.horseStrap = function() {
   var done = this.async(),
   me = this;
 
-  git.clone('git@github.com:mykebates/HorseStrap.git', './horseStrap', function(err){
+  var repo = 'git@github.com:mykebates/HorseStrap.git';
+
+  if(this.options.angular) {
+    repo = 'git@github.com:trankin/HorseStrap-Angular'
+  }
+
+  git.clone(repo, './horseStrap', function(err){
     rimraf('./horseStrap/.git', function(err){
       ncp('./horseStrap', './', function(err){
         rimraf('./horseStrap', function(err){
